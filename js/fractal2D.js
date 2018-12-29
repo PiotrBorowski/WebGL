@@ -129,3 +129,8 @@ function gl_draw() {
 function gl_clear() {
     gl_ctx.clear(gl_ctx.COLOR_BUFFER_BIT); 
 }
+
+function drawFractal(x, y, a, level)
+{
+    
+}
