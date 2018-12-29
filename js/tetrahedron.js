@@ -144,17 +144,11 @@ function gl_initShaders () {
    _MovMatrix = gl_ctx.getUniformLocation(shaderProgram, "MovMatrix");    
    _ViewMatrix = gl_ctx.getUniformLocation(shaderProgram, "ViewMatrix"); 
 
-   _sampler = gl_ctx.getUniformLocation(shaderProgram, "sampler");
-
-   _uv = gl_ctx.getAttribLocation(shaderProgram, "uv");
-
    _position = gl_ctx.getAttribLocation(shaderProgram, "position");    
    _color = gl_ctx.getAttribLocation(shaderProgram, "color");
-   gl_ctx.enableVertexAttribArray(_uv)
    gl_ctx.enableVertexAttribArray(_position);    
    gl_ctx.enableVertexAttribArray(_color);
    gl_ctx.useProgram(shaderProgram);
-   gl_ctx.uniform1i(_sampler, 0);
  
  }
 
@@ -256,4 +250,8 @@ function gl_draw() {
     if(!isRunning) {
         animate(0);
     }
+}
+
+function gl_clear() {
+    gl_ctx.clear(gl_ctx.COLOR_BUFFER_BIT); 
 }
