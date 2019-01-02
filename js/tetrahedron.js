@@ -155,17 +155,14 @@ function gl_initShaders () {
  // bufory
 function gl_initBuffers () {    
     var triangleVertices = [
-        -1,-1,-1,    
-        0, 1, 0,
-
-        1,-1,-1,     
-        1, 0,0,
- 
-        0,-1, 1,     
-        1, 1,0,
- 
-       0, 1, 0,     
-        0, 1, 0
+        -1 , -0.816, -0.577,
+        0, 0, 1, 
+        1 , -0.816 , -0.577,
+        0, 1, 0, 
+        0, -0.816 , 1.155 ,
+        1, 0, 0, 
+        0, 0.816, 0,
+        1, 1, 1
 ];
   
     _triangleVertexBuffer = gl_ctx.createBuffer();    

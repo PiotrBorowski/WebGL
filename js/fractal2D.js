@@ -164,9 +164,9 @@ function drawFractal(x, y, a, level)
     vertices.push(Math.random(),0,0);
     vertices.push(centerX+ rand1,centerY-edge+rand2);
     vertices.push(0,Math.random(),0);
-    vertices.push(centerX+edge+ rand1,centerY-edge+rand2);
+    vertices.push(centerX+edge+rand1,centerY-edge+rand2);
     vertices.push(0,0,Math.random());
-    vertices.push(centerX+edge+ rand1,centerY+rand2);
+    vertices.push(centerX+edge+rand1,centerY+rand2);
     vertices.push(0,Math.random(),Math.random());
 
     verticesFaces.push(offset+0,offset+1,offset+2);
