@@ -6,37 +6,38 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+    
+    <nav class="nav navbar-dark bg-dark">
+        <a class="nav-link" href="index.html" >Czworoscian</a>
+        <a class="nav-link" href="Fractal2D.html" >Fractal2D</a>
+    </nav>
+    
+    
     <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-2 col-md-offset-5"><h1 >Czworoscian</h1></div>
                     
             </div>
-                <div class="row">
-                    <ul className="nav justify-content-center">
-                            <a class="nav-link" href="index.html" >Czworoscian</a>
-                            <a class="nav-link" href="Fractal2D.html" >Fractal2D</a>
-                    </ul>
-                </div>
 
 
-            <div class="row">
-                <div class="col-sm-6">
+            <div class="row justify-content-md-center">
+                <div class="col-sm-3">
                     <form novalidate>
                             <div class="form-group">
                                 Czworoscian:
                                 <br/>
-                                <input type="checkbox" id="rotateX"> rotacja X 
+                                <input type="checkbox" class="form-check-input" id="rotateX"> rotacja X 
                                 <br/>
-                                <input type="checkbox" id="rotateY"> rotacja Y
+                                <input type="checkbox" class="form-check-input" id="rotateY"> rotacja Y
                                 <br/>
-                                <input type="checkbox" id="rotateZ"> rotacja Z
+                                <input type="checkbox" class="form-check-input" id="rotateZ"> rotacja Z
                                 <br/>
                                 <button class="btn btn-success" onclick="runWebGL(); return false;">Start</button>
                             </div>
                         </form>
                 </div>
 
-                 <div>   
+                 <div class="col-sm-8">   
                     <canvas id="glcanvas" width="500" height="300">
                     Brak wsparcia dla elementu HTML5 typu canvas 
                     </canvas>

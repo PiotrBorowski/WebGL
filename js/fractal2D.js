@@ -17,6 +17,10 @@ var isRunning = false;
 function runWebGLFractal2D () {
    gl_canvas = document.getElementById("glcanvas");
    gl_ctx = gl_getContext(gl_canvas);    
+   //clearing arrays
+   vertices.length = 0;
+   verticesFaces.length = 0;
+
    drawFractal(-1,1,2,3);
    gl_initShaders();    
    gl_initBuffers();    

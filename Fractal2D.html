@@ -7,35 +7,34 @@
 </head>
 <body>
  
+    <nav class="nav navbar-dark bg-dark">
+        <a class="nav-link" href="index.html" >Czworoscian</a>
+        <a class="nav-link" href="Fractal2D.html" >Fractal2D</a>
+    </nav>
+
     <div class="container">
             <div class="row justify-content-md-center">
                     <div class="col-md-2 col-md-offset-5"><h1 >Fraktal2D</h1></div>
 
             </div>
-            <div class="row">
-            <ul className="nav justify-content-center">
-                    <a class="nav-link" href="index.html" >Czworoscian</a>
-                    <a class="nav-link" href="Fractal2D.html" >Fractal2D</a>
-            </ul>
-        </div>
-            <div class="row">
+
+            <div class="row justify-content-md-center">
           
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                         <form>
                                 <div class="form-group">
                                     Fraktal:
                                     <br/>
-                                    <input type="checkbox" id="rotateX"> rotacja X 
-                                    <br/>
-                                    <input type="checkbox" id="rotateY"> rotacja Y
-                                    <br/>
-                                    <input type="checkbox" id="rotateZ"> rotacja Z
+                                    <span>Długość boku</span>
+                                    <input type="number"  class="form-control" id="edgeLength">
+                                    <span>Poziom</span>
+                                    <input type="number"  class="form-control" id="level">
                                     <br/>
                                     <button class="btn btn-success" onclick="runWebGLFractal2D(); return false;">Start</button>
                                 </div>
                             </form>
                 </div>
-                        <div>   
+                        <div class="col-sm-8">   
                             <canvas id="glcanvas" width="500" height="500">
                             Brak wsparcia dla elementu HTML5 typu canvas 
                             </canvas>
