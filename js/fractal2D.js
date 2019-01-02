@@ -12,7 +12,10 @@ var vertices = new Array();
 var verticesFaces = new Array();
 var offset = 0;
 
-var isRunning = false;
+//parametry
+var depht;
+var edgeLength;
+var deform;
 // funkcja główna  
 function runWebGLFractal2D () {
    gl_canvas = document.getElementById("glcanvas");
@@ -20,12 +23,14 @@ function runWebGLFractal2D () {
    //clearing arrays
    vertices.length = 0;
    verticesFaces.length = 0;
+   offset = 0;
 
-   drawFractal(-1,1,2,3);
+    gl_clear();
+   getParameters();
+   drawFractal(-1,1,edgeLength,depht);
    gl_initShaders();    
    gl_initBuffers();    
    gl_draw();
-   isRunning = true;
 }  
 
 // pobranie kontekstu WebGL 
@@ -134,13 +139,12 @@ function gl_draw() {
        gl_ctx.drawElements(gl_ctx.TRIANGLES, verticesFaces.length, gl_ctx.UNSIGNED_SHORT, 0);  
        gl_ctx.flush();
     };   
-    if(!isRunning){
         animate();
-    }
 }
 
 function gl_clear() {
-    gl_ctx.clear(gl_ctx.COLOR_BUFFER_BIT); 
+    gl_ctx.clear(gl_ctx.COLOR_BUFFER_BIT);  
+
 }
 
 function drawFractal(x, y, a, level)
@@ -153,14 +157,17 @@ function drawFractal(x, y, a, level)
     var centerX = x+edge;
     var centerY = y-edge;
 
-    vertices.push(centerX,centerY);
-    vertices.push(1,0,0);
-    vertices.push(centerX,centerY-edge);
-    vertices.push(0,1,0);
-    vertices.push(centerX+edge,centerY-edge);
-    vertices.push(0,0,1);
-    vertices.push(centerX+edge,centerY);
-    vertices.push(0,1,1);
+    var rand1 = Math.random()/(100/deform);
+    var rand2 = Math.random()/(100/deform);
+
+    vertices.push(centerX + rand1,centerY+rand2);
+    vertices.push(Math.random(),0,0);
+    vertices.push(centerX+ rand1,centerY-edge+rand2);
+    vertices.push(0,Math.random(),0);
+    vertices.push(centerX+edge+ rand1,centerY-edge+rand2);
+    vertices.push(0,0,Math.random());
+    vertices.push(centerX+edge+ rand1,centerY+rand2);
+    vertices.push(0,Math.random(),Math.random());
 
     verticesFaces.push(offset+0,offset+1,offset+2);
     verticesFaces.push(offset+0,offset+2,offset+3);
@@ -188,4 +195,10 @@ function drawFractal(x, y, a, level)
 	drawFractal(tempX,tempY, edge, level - 1);
 	tempY+= edge;
 	drawFractal(tempX,tempY, edge, level - 1);
+}
+
+function getParameters(){
+    edgeLength = document.getElementById('edgeLength').value;
+    depht = document.getElementById('depht').value;
+    deform = document.getElementById('deform').value;
 }

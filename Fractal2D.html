@@ -26,9 +26,11 @@
                                     Fraktal:
                                     <br/>
                                     <span>Długość boku</span>
-                                    <input type="number"  class="form-control" id="edgeLength">
-                                    <span>Poziom</span>
-                                    <input type="number"  class="form-control" id="level">
+                                    <input type="number" min="0" class="form-control" id="edgeLength">
+                                    <span>Głębokość</span>
+                                    <input type="number" min="1" max="6" class="form-control" id="depht">
+                                    <span>Deformacje</span>
+                                    <input type="number" min="1" max="10" class="form-control" id="deform">
                                     <br/>
                                     <button class="btn btn-success" onclick="runWebGLFractal2D(); return false;">Start</button>
                                 </div>
