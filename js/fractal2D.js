@@ -8,12 +8,16 @@ var _color;
 var _triangleVertexBuffer; 
 var _triangleFacesBuffer;  
 
+var vertices = new Array();
+var verticesFaces = new Array();
+var offset = 0;
+
 var isRunning = false;
 // funkcja główna  
 function runWebGLFractal2D () {
    gl_canvas = document.getElementById("glcanvas");
    gl_ctx = gl_getContext(gl_canvas);    
-
+   drawFractal(-1,1,2,3);
    gl_initShaders();    
    gl_initBuffers();    
    gl_draw();
@@ -91,16 +95,21 @@ function gl_initBuffers () {
  
    _triangleVertexBuffer = gl_ctx.createBuffer();   
    gl_ctx.bindBuffer(gl_ctx.ARRAY_BUFFER, _triangleVertexBuffer);
+   console.log(vertices)
    gl_ctx.bufferData(gl_ctx.ARRAY_BUFFER, 
-                     new Float32Array(triangleVertices),
+                     new Float32Array(vertices),
    gl_ctx.STATIC_DRAW);     
 
-   var triangleFaces = [0, 1, 2];     
+   var triangleFaces = [
+    0, 1, 2,   
+    0, 2, 3
+];     
 
+    console.log(verticesFaces)
    _triangleFacesBuffer = gl_ctx.createBuffer();
    gl_ctx.bindBuffer(gl_ctx.ELEMENT_ARRAY_BUFFER, _triangleFacesBuffer);
    gl_ctx.bufferData(gl_ctx.ELEMENT_ARRAY_BUFFER,                     
-                     new Uint16Array(triangleFaces),                      
+                     new Uint16Array(verticesFaces),                      
                      gl_ctx.STATIC_DRAW);
 }  
 
@@ -118,7 +127,7 @@ function gl_draw() {
        gl_ctx.bindBuffer(gl_ctx.ARRAY_BUFFER, _triangleVertexBuffer);      
        gl_ctx.bindBuffer(gl_ctx.ELEMENT_ARRAY_BUFFER, _triangleFacesBuffer);
 
-       gl_ctx.drawElements(gl_ctx.TRIANGLES, 3, gl_ctx.UNSIGNED_SHORT, 0);  
+       gl_ctx.drawElements(gl_ctx.TRIANGLES, verticesFaces.length, gl_ctx.UNSIGNED_SHORT, 0);  
        gl_ctx.flush();
     };   
     if(!isRunning){
@@ -132,5 +141,47 @@ function gl_clear() {
 
 function drawFractal(x, y, a, level)
 {
-    
+    if(level == 0){
+        return;
+    }
+
+    var edge = a/3;
+    var centerX = x+edge;
+    var centerY = y-edge;
+
+    vertices.push(centerX,centerY);
+    vertices.push(1,0,0);
+    vertices.push(centerX,centerY-edge);
+    vertices.push(0,1,0);
+    vertices.push(centerX+edge,centerY-edge);
+    vertices.push(0,0,1);
+    vertices.push(centerX+edge,centerY);
+    vertices.push(0,1,1);
+
+    verticesFaces.push(offset+0,offset+1,offset+2);
+    verticesFaces.push(offset+0,offset+2,offset+3);
+
+    offset += 4;
+
+    var tempX = x;
+    var tempY = y;
+
+    drawFractal(tempX,tempY,edge,level-1);
+    tempX += edge;
+	drawFractal(tempX,tempY, edge, level - 1);
+	tempX += edge;
+	drawFractal(tempX,tempY, edge, level - 1);
+
+	tempX = x;
+	tempY = y - edge;
+
+	drawFractal(tempX,tempY, edge, level - 1);
+	tempY -= edge;
+	drawFractal(tempX,tempY, edge, level - 1);
+	tempX += edge;
+	drawFractal(tempX,tempY, edge, level - 1);
+	tempX += edge;
+	drawFractal(tempX,tempY, edge, level - 1);
+	tempY+= edge;
+	drawFractal(tempX,tempY, edge, level - 1);
 }
